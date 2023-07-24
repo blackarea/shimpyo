@@ -5,12 +5,12 @@ name: CI
 on:
   push: # master branch로 push 될 때 실행
     branches: [ "master" ]
-  pull_request: # master branch로 pull request 될 때 실행
-    branches: [ "master" ]
 
-permissions: # 내용(contents)을 읽기(read) 권한으로 설정
-  contents: read
-
+env:
+  S3_BUCKET_NAME: shimpyotest
+  CODEDEPLOY_NAME: shimpyotest
+  CODEDEPLOY_GROUP: shimpyotest-group
+  
 #workflow는 1개 이상의 job을 가지며, 각각의 job은 여러 개의 step에 따라 단계를 나눌 수 있다.
 jobs:
   build: #작업 이름을 build라 지정
@@ -29,11 +29,7 @@ jobs:
     
     - name: Build with Gradle
       run: ./gradlew clean build
-      
-#     - name: Build with Gradle #step 이름을 정의
-#       uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1 #gradle-build-action을 통해 Gradle로 빌드
-#       with:
-#         arguments: build #Gradle에게 build 명령어를 전달함으로써 프로젝트를 빌드한다.
+
         
     # 전송할 파일을 담을 디렉토리 생성
     - name: Make Directory for deliver
@@ -60,11 +56,7 @@ jobs:
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      run: |
-        aws s3 cp \
-        --region ap-northeast-2 \
-        --acl private \
-        ./shimpyo-build.zip s3://shimpyo-backend-bucket/
+      run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.zip s3://$S3_BUCKET_NAME/$GITHUB_SHA.zip
 
     # Deploy
     - name: Deploy
@@ -73,8 +65,8 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       run: |
         aws deploy create-deployment \
-        --application-name shimpyo \
-        --deployment-group-name shimpyo-deploy-group \
+        --application-name $CODEDEPLOY_NAME \
+        --deployment-group-name $CODEDEPLOY_GROUP \
         --file-exists-behavior OVERWRITE \
-        --s3-location bucket=shimpyo-backend-bucket,bundleType=zip,key=shimpyo-build.zip \
+        --s3-location bucket=$S3_BUCKET_NAME,bundleType=zip,key=$GITHUB_SHA.zip \
         --region ap-northeast-2
