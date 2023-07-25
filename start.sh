@@ -5,7 +5,7 @@ PROJECT_NAME=shimpyo  # 어플리케이션 이름 변경
 
 echo "> Build 파일 복사"
 
-cp $REPOSITORY/build/libs/*.jar $REPOSITORY/
+cp $REPOSITORY/build/libs/shimpyo-0.0.1-SNAPSHOT.jar $REPOSITORY/
 
 echo "> 현재 구동중인 애플리케이션 pid 확인"
 
@@ -17,7 +17,7 @@ if [ -z "$CURRENT_PID" ]; then
     echo "> 현재 구동 중인 애플리케이션이 없으므로 종료하지 않습니다."
 else
     echo "> kill -9 $CURRENT_PID"
-    sudo kill -9 $CURRENT_PID
+    kill -9 $CURRENT_PID
     sleep 2
 fi
 
@@ -29,7 +29,7 @@ echo "> JAR Name: $JAR_NAME"
 
 echo "> $JAR_NAME 에 실행권한 추가"
 
-sudo chmod +x $JAR_NAME
+chmod +x $JAR_NAME
 
 echo "> $JAR_NAME 실행"
 

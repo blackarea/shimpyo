@@ -13,9 +13,9 @@ cloud:
 
 spring:
   profiles:
-    include: db, oauth
+    include: db
 #  config:
-#    import: db-config.yml, application-oauth.yml
+#    import: db-configlocal.yml
 
   #    config import 지정해줘야 데이터 저장됨
   servlet:
