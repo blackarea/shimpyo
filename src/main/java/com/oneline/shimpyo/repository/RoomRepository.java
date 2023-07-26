@@ -16,4 +16,8 @@ public interface RoomRepository extends JpaRepository<Room, Long> {
     @Lock(LockModeType.OPTIMISTIC)
     @Query("select r from Room r where r.id = :id")
     Optional<Room> findByIdWithLock(@Param("id") Long id);
+
+    @Lock(LockModeType.PESSIMISTIC_WRITE)
+    @Query("select r from Room r where r.id = :id")
+    Optional<Room> findByIdPessimisticLock(@Param("id") Long id);
 }

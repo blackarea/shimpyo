@@ -1,7 +1,6 @@
 package com.oneline.shimpyo.service.impl;
 
 import com.oneline.shimpyo.domain.BaseException;
-import com.oneline.shimpyo.domain.house.House;
 import com.oneline.shimpyo.domain.house.ImageStatus;
 import com.oneline.shimpyo.domain.house.dto.FileReq;
 import com.oneline.shimpyo.domain.member.Member;
@@ -9,7 +8,7 @@ import com.oneline.shimpyo.domain.room.Room;
 import com.oneline.shimpyo.domain.room.RoomImage;
 import com.oneline.shimpyo.domain.room.dto.PatchRoomReq;
 import com.oneline.shimpyo.modules.S3FileHandler;
-import com.oneline.shimpyo.repository.HouseRepository;
+import com.oneline.shimpyo.modules.aop.Retry;
 import com.oneline.shimpyo.repository.RoomImageRepository;
 import com.oneline.shimpyo.repository.RoomRepository;
 import com.oneline.shimpyo.service.RoomService;
@@ -30,6 +29,13 @@ public class RoomServiceImpl implements RoomService {
     private final RoomImageRepository roomImageRepository;
     private final RoomRepository roomRepository;
     private final S3FileHandler s3FileHandler;
+
+    @Retry
+    @Transactional
+    public void increaseBedCountOptimisticLock(long id){
+        Room room = roomRepository.findByIdWithLock(id).orElseThrow();
+        room.increaseBed();
+    }
 
     @Override
     @Transactional

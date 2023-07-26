@@ -90,4 +90,8 @@ public class Room extends BaseEntity {
         this.nonMemberReservations = nonMemberReservations;
     }
 
+    public void increaseBed(){
+        this.bedCount = this.bedCount+1;
+    }
+
 }
