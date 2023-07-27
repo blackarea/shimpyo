@@ -1,23 +1,32 @@
 server:
   port: 8081
+  tomcat:
+    mbeanregistry:
+      enabled: true
 
-cloud:
-  aws:
-    s3:
-      bucket: shimpyo-image-bucket
-    credentials:
-      accessKey: temp
-      secretKey: temp
-    stack.auto: false
-    region.static: ap-northeast-2
-
+management:
+  info:
+    java:
+      enabled: true
+    os:
+      enabled: true
+    env:
+      enabled: true
+  endpoint:
+    shutdown:
+      enabled: true
+    health:
+      show-components: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"
 spring:
-#  profiles:
-#    include: db
-  config:
-    import: db-configlocal.yml
+  profiles:
+    include: db
+#  config:
+#    import: db-configlocal.yml
 
-  #    config import 지정해줘야 데이터 저장됨
   servlet:
     multipart:
       max-file-size: 1GB
@@ -34,8 +43,6 @@ spring:
 #        show_sql: true
         format_sql: true
         default_batch_fetch_size: 100
-  #    defer-datasource-initialization: true
-  #        use_sql_comments: true
 
   data:
     web:
@@ -44,7 +51,6 @@ spring:
 
   logging.level:
     org.hibernate.SQL: debug
-#    org.hibernate.type: trace
 
   security:
     oauth2:
@@ -90,3 +96,13 @@ spring:
             token-uri: https://kauth.kakao.com/oauth/token
             user-info-uri: https://kapi.kakao.com/v2/user/me
             user-name-attribute: id
+
+cloud:
+  aws:
+    s3:
+      bucket: shimpyo-image-bucket
+    credentials:
+      accessKey: temp
+      secretKey: temp
+    stack.auto: false
+    region.static: ap-northeast-2
