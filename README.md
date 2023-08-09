@@ -33,15 +33,15 @@
 
 ### Architecture
 
-![development_map](https://github.com/Project-Shimpyo/backend/assets/119032680/89dc4c0b-9515-43ee-9250-b0a2c1c2c77c)
+![1](https://github.com/blackarea/Algorithm/assets/47111722/f926a0b3-729f-4978-a000-a700294e24de)
 
 ### ERD
 
-![KakaoTalk_20230717_170522640](https://github.com/Project-Shimpyo/backend/assets/47111722/610b6480-d23d-496b-9564-8a1a0d3ab376)
+![2](https://github.com/blackarea/Algorithm/assets/47111722/dffaa988-f4ff-4091-a94b-ae95622e1518)
 
 ### API
 
-[API 명세서 바로가기](https://docs.google.com/spreadsheets/d/1lcUy45KENA28HkA6w2CRJwkndWbBS591vnjQbwSXX9s/edit?usp=sharing)
+[API 명세서 바로가기]([https://docs.google.com/spreadsheets/d/1lcUy45KENA28HkA6w2CRJwkndWbBS591vnjQbwSXX9s/edit?usp=sharing](https://docs.google.com/spreadsheets/d/13lJ69muh6jekpnK3wupMvltjGZn6wmNjQVIcYhELIOo/edit?usp=sharing))
 
 # 🔧 기술 스택
 
