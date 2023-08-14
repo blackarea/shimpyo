@@ -3,6 +3,9 @@ server:
   tomcat:
     mbeanregistry:
       enabled: true
+    threads:
+      max: 28
+      min-spare: 28
 
 management:
   info:
@@ -26,6 +29,12 @@ spring:
     include: db
 #  config:
 #    import: db-configlocal.yml
+
+  datasource:
+    hikari:
+      maximum-pool-size: 30   #최대 connection 수
+      max-lifetime: 295000    #ms 단위 295초
+      pool-name: Hikari
 
   servlet:
     multipart:
