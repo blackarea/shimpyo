@@ -4,7 +4,6 @@ import com.oneline.shimpyo.domain.BaseException;
 import com.oneline.shimpyo.domain.house.*;
 import com.oneline.shimpyo.domain.house.dto.*;
 import com.oneline.shimpyo.domain.member.Member;
-import com.oneline.shimpyo.domain.review.dto.ReviewStatusCount;
 import com.oneline.shimpyo.domain.room.Room;
 import com.oneline.shimpyo.domain.room.RoomImage;
 import com.oneline.shimpyo.domain.room.dto.RoomInfo;
@@ -206,8 +205,10 @@ public class HouseServiceImpl implements HouseService {
 
     @Override
     public List<GetHouseListRes> readHouseList(Pageable pageable, SearchFilterReq searchFilter, Member member) {
-        List<GetHouseListRes> foundHouseList = houseQuerydsl.findAllHouse(pageable, searchFilter, member);
-        return foundHouseList;
+        if(member == null){
+            return houseQuerydsl.findAllHouseNoLogin(pageable, searchFilter);
+        }
+        return houseQuerydsl.findAllHouseLogin(pageable, searchFilter, member);
     }
 
     @Override

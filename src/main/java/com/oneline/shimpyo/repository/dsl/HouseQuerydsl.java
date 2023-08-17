@@ -8,6 +8,8 @@ import com.oneline.shimpyo.domain.room.Room;
 
 import com.oneline.shimpyo.domain.room.dto.QRoomInfo;
 import com.oneline.shimpyo.domain.room.dto.RoomInfo;
+import com.querydsl.core.group.GroupBy;
+import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.data.domain.Pageable;
@@ -84,57 +86,39 @@ public class HouseQuerydsl {
                 .fetch();
     }
 
-    public List<GetHouseListRes> findAllHouse(Pageable pageable, SearchFilterReq searchFilter, Member member) {
-        List<GetHouseListRes> foundHouseList = jqf.select(new QGetHouseListRes(house.id, house.name, house.type, room.price.min(), houseAddress.sido, houseAddress.sigungu, room.id.min(), house.avgRating))
-                .from(house)
-                .join(house.houseAddress, houseAddress)
-                .on(house.id.eq(houseAddress.house.id))
-                .join(house.rooms, room)
-                .on(house.id.eq(room.house.id))
-                .where(minPeopleLoe(searchFilter.getPeople()), maxPeopleGoe(searchFilter.getPeople()), typeEq(searchFilter.getType())
-                        , cityEq(searchFilter.getCity()), districtEq(searchFilter.getDistrict()))
-                .offset(pageable.getOffset())
-                .limit(pageable.getPageSize())
-                .groupBy(house.id, houseAddress.sido, houseAddress.sigungu)
+    public List<GetHouseListRes> findAllHouseNoLogin(Pageable pageable, SearchFilterReq searchFilter) {
+        return jqf.selectFrom(house)
+                .leftJoin(house.images, houseImage)
+                .leftJoin(house.houseAddress, houseAddress)
+                .leftJoin(house.rooms, room)
                 .orderBy(house.avgRating.desc())
-                .fetch();
+                .where(minPeopleLoe(searchFilter.getPeople()), maxPeopleGoe(searchFilter.getPeople()),
+                        typeEq(searchFilter.getType()), cityEq(searchFilter.getCity()), districtEq(searchFilter.getDistrict()))
+                .offset(pageable.getOffset())
+                .groupBy(houseImage, houseAddress.sido, houseAddress.sigungu)
+                .transform(GroupBy.groupBy(house.id).list(new QGetHouseListRes(
+                        house.id, house.name, house.type, room.price, houseAddress.sido,
+                        houseAddress.sigungu, room.id, house.avgRating,
+                        GroupBy.list(houseImage.savedURL))
+                ));
+    }
 
-
-        //이미지 저장 및 관심숙소 등록여부 검증
-        for (GetHouseListRes houseRes : foundHouseList) {
-            // 이미지 저장
-            houseRes.setHouseImages(findHouseImagesByHouseId(houseRes.getHouseId()));
-            
-            // 관심숙소 등록여부 검증
-            if (member != null) {
-                long result = jqf.select(wish.member.id.count())
-                        .from(wish)
-                        .where(wish.member.id.eq(member.getId()), wish.house.id.eq(houseRes.getHouseId()))
-                        .fetchOne();
-                if (result > 0) houseRes.setWished(true);
-            }
-        }
-
-        // 체크인, 체크아웃 기간이 명시되어 있을 경우
-        if (searchFilter.getCheckin() != null && searchFilter.getCheckout() != null) {
-            for (GetHouseListRes houseRes : foundHouseList) {
-                if (checkReservation(houseRes.getRoomId(), searchFilter.getCheckin(), searchFilter.getCheckout())) houseRes.setSoldout(true);
-//                Room foundRoom = jqf.selectFrom(room)
-//                        .where(room.id.eq(houseRes.getRoomId()))
-//                        .fetchOne();
-//                long reservedCount = jqf.select(reservation.count())
-//                        .from(reservation)
-//                        .where(reservation.reservationStatus.eq(ReservationStatus.COMPLETE), reservation.room.id.eq(houseRes.getRoomId()),
-//                                reservation.checkInDate.loe(searchFilter.getCheckin()),
-//                                reservation.checkOutDate.goe(searchFilter.getCheckout()))
-//                        .fetchOne();
-//                if (foundRoom.getTotalCount() <= reservedCount) { // 얘약인원이 꽉 찬 경우 해당 숙소 정보를 목록에서 제외
-//                    houseRes.setSoldout(true);
-//                }
-            }
-        }
-
-        return foundHouseList;
+    public List<GetHouseListRes> findAllHouseLogin(Pageable pageable, SearchFilterReq searchFilter, Member member) {
+        return jqf.selectFrom(house)
+                .leftJoin(house.images, houseImage)
+                .leftJoin(house.houseAddress, houseAddress)
+                .leftJoin(house.rooms, room)
+                .leftJoin(house.wishList, wish).on(wish.house.eq(house), wish.member.eq(member))
+                .orderBy(house.avgRating.desc())
+                .where(minPeopleLoe(searchFilter.getPeople()), maxPeopleGoe(searchFilter.getPeople()),
+                        typeEq(searchFilter.getType()), cityEq(searchFilter.getCity()), districtEq(searchFilter.getDistrict()))
+                .offset(pageable.getOffset())
+                .groupBy(houseImage, houseAddress.sido, houseAddress.sigungu)
+                .transform(GroupBy.groupBy(house.id).list(new QGetHouseListRes(
+                        house.id, house.name, house.type, room.price, houseAddress.sido,
+                        houseAddress.sigungu, room.id, house.avgRating, wish.member.id.eq(member.getId()),
+                        GroupBy.list(houseImage.savedURL))
+                ));
     }
 
     // 동적 Query DSL Where 조건
