@@ -5,7 +5,7 @@ import com.oneline.shimpyo.domain.coupon.dto.QGetCouponRes;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
+import jakarta.persistence.EntityManager;
 
 import java.util.List;
 

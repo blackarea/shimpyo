@@ -4,10 +4,10 @@ import com.oneline.shimpyo.domain.base.BaseEntity;
 import com.oneline.shimpyo.domain.coupon.Coupon;
 import lombok.*;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
-import static javax.persistence.FetchType.*;
+import static jakarta.persistence.FetchType.*;
 import static lombok.AccessLevel.PROTECTED;
 
 @Entity

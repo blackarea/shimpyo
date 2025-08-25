@@ -11,15 +11,15 @@ import com.oneline.shimpyo.domain.wish.Wish;
 import com.oneline.shimpyo.security.CustomBCryptPasswordEncoder;
 import lombok.*;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.oneline.shimpyo.domain.member.MemberRole.*;
-import static javax.persistence.CascadeType.ALL;
-import static javax.persistence.EnumType.STRING;
-import static javax.persistence.FetchType.LAZY;
+import static jakarta.persistence.CascadeType.ALL;
+import static jakarta.persistence.EnumType.STRING;
+import static jakarta.persistence.FetchType.LAZY;
 import static lombok.AccessLevel.PROTECTED;
 
 @Builder

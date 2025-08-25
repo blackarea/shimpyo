@@ -20,8 +20,8 @@ import org.json.simple.JSONObject;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.persistence.EntityManager;
+import jakarta.servlet.http.HttpServletResponse;
 import java.util.HashMap;
 import java.util.Map;
 

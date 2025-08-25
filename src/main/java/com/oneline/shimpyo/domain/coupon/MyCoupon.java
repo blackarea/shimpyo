@@ -4,11 +4,11 @@ import com.oneline.shimpyo.domain.base.BaseEntity;
 import com.oneline.shimpyo.domain.member.Member;
 import lombok.*;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
-import static javax.persistence.FetchType.LAZY;
+import static jakarta.persistence.FetchType.LAZY;
 import static lombok.AccessLevel.PROTECTED;
 
 @Builder

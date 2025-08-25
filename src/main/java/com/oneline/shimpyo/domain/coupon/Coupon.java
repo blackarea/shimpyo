@@ -4,13 +4,13 @@ import com.oneline.shimpyo.domain.base.BaseEntity;
 import com.oneline.shimpyo.domain.pay.PayMent;
 import lombok.*;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static javax.persistence.CascadeType.*;
+import static jakarta.persistence.CascadeType.*;
 import static lombok.AccessLevel.PROTECTED;
 
 @Builder

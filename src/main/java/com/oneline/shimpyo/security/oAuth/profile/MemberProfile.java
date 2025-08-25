@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.persistence.EntityManager;
+import jakarta.persistence.EntityManager;
 
 import static com.oneline.shimpyo.domain.member.GradeName.SILVER;
 import static com.oneline.shimpyo.domain.member.MemberRole.CLIENT;

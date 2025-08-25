@@ -15,7 +15,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
+import jakarta.persistence.EntityManager;
 
 
 import java.time.LocalDateTime;

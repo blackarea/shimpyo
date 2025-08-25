@@ -2,7 +2,7 @@ package com.oneline.shimpyo.domain.room;
 
 import lombok.*;
 
-import javax.persistence.Embeddable;
+import jakarta.persistence.Embeddable;
 
 @Builder
 @AllArgsConstructor

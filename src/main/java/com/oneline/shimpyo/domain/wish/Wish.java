@@ -5,9 +5,9 @@ import com.oneline.shimpyo.domain.house.House;
 import com.oneline.shimpyo.domain.member.Member;
 import lombok.*;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
-import static javax.persistence.FetchType.LAZY;
+import static jakarta.persistence.FetchType.LAZY;
 import static lombok.AccessLevel.PROTECTED;
 
 @Entity

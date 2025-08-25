@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import static com.oneline.shimpyo.domain.BaseResponseStatus.JWT_TOKEN_INVALID;
 import static com.oneline.shimpyo.domain.BaseResponseStatus.JWT_TOKEN_NONEXISTENT;

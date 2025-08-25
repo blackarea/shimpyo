@@ -6,12 +6,12 @@ import com.oneline.shimpyo.domain.room.Room;
 import lombok.*;
 
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
-import static javax.persistence.CascadeType.ALL;
-import static javax.persistence.FetchType.LAZY;
+import static jakarta.persistence.CascadeType.ALL;
+import static jakarta.persistence.FetchType.LAZY;
 import static lombok.AccessLevel.PROTECTED;
 
 @Entity

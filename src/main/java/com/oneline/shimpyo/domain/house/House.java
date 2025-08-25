@@ -7,14 +7,13 @@ import com.oneline.shimpyo.domain.room.Room;
 import com.oneline.shimpyo.domain.wish.Wish;
 import lombok.*;
 
-import javax.annotation.meta.When;
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static javax.persistence.CascadeType.ALL;
-import static javax.persistence.EnumType.STRING;
-import static javax.persistence.FetchType.*;
+import static jakarta.persistence.CascadeType.ALL;
+import static jakarta.persistence.EnumType.STRING;
+import static jakarta.persistence.FetchType.*;
 import static lombok.AccessLevel.PROTECTED;
 
 @Entity

@@ -6,11 +6,11 @@ import com.oneline.shimpyo.domain.member.Member;
 import com.oneline.shimpyo.domain.reservation.Reservation;
 import lombok.*;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
-import static javax.persistence.EnumType.STRING;
-import static javax.persistence.FetchType.LAZY;
+import static jakarta.persistence.EnumType.STRING;
+import static jakarta.persistence.FetchType.LAZY;
 import static lombok.AccessLevel.PROTECTED;
 
 @Entity

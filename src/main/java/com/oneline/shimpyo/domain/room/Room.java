@@ -7,14 +7,14 @@ import com.oneline.shimpyo.domain.reservation.Reservation;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import static javax.persistence.CascadeType.ALL;
-import static javax.persistence.FetchType.LAZY;
+import static jakarta.persistence.CascadeType.ALL;
+import static jakarta.persistence.FetchType.LAZY;
 import static lombok.AccessLevel.PROTECTED;
 
 @Builder

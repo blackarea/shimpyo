@@ -3,10 +3,10 @@ package com.oneline.shimpyo.domain.member;
 import com.oneline.shimpyo.domain.base.BaseEntity;
 import lombok.*;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
-import static javax.persistence.FetchType.LAZY;
+import static jakarta.persistence.FetchType.LAZY;
 import static lombok.AccessLevel.*;
 
 @Builder

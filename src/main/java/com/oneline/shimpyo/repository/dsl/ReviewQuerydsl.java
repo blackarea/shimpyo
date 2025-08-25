@@ -13,7 +13,7 @@ import org.springframework.data.domain.Slice;
 import org.springframework.data.domain.SliceImpl;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.EntityManager;
+import jakarta.persistence.EntityManager;
 import java.util.List;
 
 import static com.oneline.shimpyo.domain.house.QHouse.house;

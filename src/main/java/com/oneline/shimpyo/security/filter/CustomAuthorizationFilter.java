@@ -18,11 +18,11 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import javax.servlet.FilterChain;
-import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.util.*;
@@ -30,8 +30,8 @@ import java.util.*;
 import static com.oneline.shimpyo.domain.BaseResponseStatus.JWT_TOKEN_WRONG;
 import static com.oneline.shimpyo.security.jwt.JwtConstants.*;
 import static com.oneline.shimpyo.security.jwt.JwtTokenUtil.*;
-import static javax.servlet.http.HttpServletResponse.SC_BAD_REQUEST;
-import static javax.servlet.http.HttpServletResponse.SC_UNAUTHORIZED;
+import static jakarta.servlet.http.HttpServletResponse.SC_BAD_REQUEST;
+import static jakarta.servlet.http.HttpServletResponse.SC_UNAUTHORIZED;
 import static org.apache.commons.lang.StringUtils.*;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;

@@ -2,13 +2,13 @@ package com.oneline.shimpyo.domain.member;
 
 import lombok.*;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-import static javax.persistence.CascadeType.*;
-import static javax.persistence.EnumType.*;
+import static jakarta.persistence.CascadeType.*;
+import static jakarta.persistence.EnumType.*;
 import static lombok.AccessLevel.PROTECTED;
 
 @Builder
